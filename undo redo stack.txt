@@ -1,0 +1,48 @@
+
+undo_stack = []
+redo_stack = []
+
+text = ""
+
+while True:
+    print("\n1. Type text")
+    print("2. Undo")
+    print("3. Redo")
+    print("4. Display")
+    print("5. Exit")
+
+    choice = int(input("Enter choice: "))
+
+    if choice == 1:
+        new_text = input("Enter text: ")
+
+        undo_stack.append(text)
+        text = text + new_text
+
+        # New action clears redo history
+        redo_stack.clear()
+
+    elif choice == 2:
+        if len(undo_stack) > 0:
+            redo_stack.append(text)
+            text = undo_stack.pop()
+            print("Undo successful")
+        else:
+            print("Nothing to undo")
+
+    elif choice == 3:
+        if len(redo_stack) > 0:
+            undo_stack.append(text)
+            text = redo_stack.pop()
+            print("Redo successful")
+        else:
+            print("Nothing to redo")
+
+    elif choice == 4:
+        print("Current text:", text)
+
+    elif choice == 5:
+        break
+
+    else:
+        print("Invalid choice")

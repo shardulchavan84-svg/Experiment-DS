@@ -1,0 +1,20 @@
+
+# Linear Probing
+
+size = 10
+table = [-1] * size
+
+keys = [25, 35, 45, 15]
+
+for key in keys:
+    index = key % size
+
+    while table[index] != -1:
+        index = (index + 1) % size
+
+    table[index] = key
+
+print("Hash Table:")
+
+for i in range(size):
+    print(i, ":", table[i])
